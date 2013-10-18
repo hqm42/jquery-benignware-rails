@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Benignware::Jquery::Rails
 
 TODO: Write a gem description
@@ -27,3 +28,9 @@ TODO: Write usage instructions here
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+=======
+benignware-jquery-rails
+=======================
+
+Test gem
+>>>>>>> 199b0604c1367025551718669c5185b1f27abbe6
