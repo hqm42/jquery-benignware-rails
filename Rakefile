@@ -34,9 +34,7 @@ end
 
 desc 'Tags version, pushes to remote, and pushes gem'
 task :release => :build do
-  sh "git tag v#{Benignware::Jquery::Rails::VERSION}"
   sh "git push origin master"
-  sh "git push origin v#{Benignware::Jquery::Rails::VERSION}"
   sh "gem push benignware-jquery-rails-#{Benignware::Jquery::Rails::VERSION}.gem"
 end
 
