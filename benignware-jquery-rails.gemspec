@@ -12,10 +12,11 @@ Gem::Specification.new do |gem|
   gem.summary       = %q{gem summary}
   gem.homepage      = ""
 
-  #gem.add_dependency "railties", ">= 3.2.0", "< 5.0"
+  gem.add_dependency "railties", ">= 3.2.0", "< 5.0"
   
-  gem.files         = `git ls-files`.split($/)
-  gem.files         = Dir["{lib,vendor}/**/*"]
+  #gem.files         = `git ls-files`.split($/)
+  gem.files        = `git ls-files`.split("\n").reject { |f| f =~ /^checkview/ }
+  #gem.files         = Dir["{lib,vendor}/**/*"]
   
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
