@@ -1,0 +1,3 @@
+[submodule "checkview"]
+	path = checkview
+	url = git://github.com/benignware/jquery-checkview
