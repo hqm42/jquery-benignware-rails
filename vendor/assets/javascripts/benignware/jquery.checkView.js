@@ -1,6 +1,8 @@
 
 (function ( $, window) {
 
+	console.info ('init checkview plugin');
+	
 	var pluginName = 'checkView';
 	
 	var defaults = {

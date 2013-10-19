@@ -1,7 +1,10 @@
 require "bundler/gem_tasks"
 
 task :update do
+  Rake.rake_output_message 'update modules'
+  sh 'git submodule foreach git pull origin master'
   sh 'git submodule update --init' unless File.exist?('checkview/README.md')
+  
 end
 
 desc "Remove the vendor directory"
