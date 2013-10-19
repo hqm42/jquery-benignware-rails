@@ -16,7 +16,7 @@ task :assets => :update do
   
   mkdir_p target_dir
   
-  Dir.glob("checkview/src/js/*.js").each do |path|
+  Dir.glob("submodules/*/src/js/*.js").each do |path|
     basename = File.basename(path)
     Rake.rake_output_message 'asset ' + basename
     File.open("#{target_dir}/#{basename}", "w") do |out|
@@ -25,6 +25,17 @@ task :assets => :update do
       out.write(source_code)
     end
   end
+  
+  Dir.glob("submodules/*/src/css/*.js").each do |path|
+    basename = File.basename(path)
+    Rake.rake_output_message 'asset ' + basename
+    File.open("#{target_dir}/#{basename}", "w") do |out|
+      out.write("\n")
+      source_code = File.read(path)
+      out.write(source_code)
+    end
+  end
+  
 end
 
 
@@ -33,9 +44,5 @@ task :build => [:clean, :assets] do
   sh "gem build jquery-benignware-rails.gemspec"
 end
 
-desc 'Tags version, pushes to remote, and pushes gem'
-task :release => :build do
-  sh "gem push jquery-benignware-rails-#{Jquery::Benignware::Rails::VERSION}.gem"
-end
 
 task :default => :build
