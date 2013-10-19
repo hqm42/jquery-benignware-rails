@@ -11,25 +11,29 @@ task :clean do
 end
 
 desc "Generate the JavaScript assets"
-task :assets => :update do
-  target_dir = "vendor/assets/javascripts/benignware"
+task :assets do
   
-  mkdir_p target_dir
+  
+  js_dir = "vendor/assets/javascripts/benignware"
+  mkdir_p js_dir
   
   Dir.glob("submodules/*/src/js/*.js").each do |path|
     basename = File.basename(path)
     Rake.rake_output_message 'asset ' + basename
-    File.open("#{target_dir}/#{basename}", "w") do |out|
+    File.open("#{js_dir}/#{basename}", "w") do |out|
       out.write("\n")
       source_code = File.read(path)
       out.write(source_code)
     end
   end
   
-  Dir.glob("submodules/*/src/css/*.js").each do |path|
+  css_dir = "vendor/assets/stylesheets/benignware"
+  mkdir_p css_dir
+  
+  Dir.glob("submodules/*/src/css/*.css").each do |path|
     basename = File.basename(path)
     Rake.rake_output_message 'asset ' + basename
-    File.open("#{target_dir}/#{basename}", "w") do |out|
+    File.open("#{css_dir}/#{basename}", "w") do |out|
       out.write("\n")
       source_code = File.read(path)
       out.write(source_code)
@@ -40,7 +44,7 @@ end
 
 
 desc 'Builds the gem'
-task :build => [:clean, :assets] do
+task :build => [:update, :clean, :assets] do
   sh "gem build jquery-benignware-rails.gemspec"
 end
 
