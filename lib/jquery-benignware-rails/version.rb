@@ -1,5 +1,5 @@
-module Benignware
-  module Jquery
+module Jquery
+  module Benignware
     module Rails
       VERSION = "0.1.7"
     end

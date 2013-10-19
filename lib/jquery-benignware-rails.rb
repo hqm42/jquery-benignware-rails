@@ -1,7 +1,7 @@
-require "benignware-jquery-rails/version"
+require "jquery-benignware-rails/version"
 
-module Benignware
-  module Jquery
+module Jquery
+  module Benignware
     module Rails
       class Engine < ::Rails::Engine
       end

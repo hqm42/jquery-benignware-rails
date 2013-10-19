@@ -32,12 +32,12 @@ end
 
 desc 'Builds the gem'
 task :build => [:clean, :assets] do
-  sh "gem build benignware-jquery-rails.gemspec"
+  sh "gem build jquery-benignware-rails.gemspec"
 end
 
 desc 'Tags version, pushes to remote, and pushes gem'
 task :release => :build do
-  sh "gem push benignware-jquery-rails-#{Benignware::Jquery::Rails::VERSION}.gem"
+  sh "gem push jquery-benignware-rails-#{Jquery::Benignware::Rails::VERSION}.gem"
 end
 
 task :default => :build

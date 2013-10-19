@@ -1,4 +1,4 @@
-# Benignware::Jquery::Rails
+# Jquery::Benignware::Rails
 
 TODO: Write a gem description
 
@@ -6,7 +6,7 @@ TODO: Write a gem description
 
 Add this line to your application's Gemfile:
 
-    gem 'benignware-jquery-rails'
+    gem 'jquery-benignware-rails'
 
 And then execute:
 
@@ -14,7 +14,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install benignware-jquery-rails
+    $ gem install jquery-benignware-rails
 
 ## Usage
 
