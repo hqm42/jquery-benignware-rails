@@ -17,7 +17,7 @@ task :assets do
   js_dir = "vendor/assets/javascripts/benignware"
   mkdir_p js_dir
   
-  Dir.glob("submodules/*/src/js/*.js").each do |path|
+  Dir.glob("submodules/*/dist/js/*.js").each do |path|
     basename = File.basename(path)
     Rake.rake_output_message 'asset ' + basename
     File.open("#{js_dir}/#{basename}", "w") do |out|
@@ -30,7 +30,7 @@ task :assets do
   css_dir = "vendor/assets/stylesheets/benignware"
   mkdir_p css_dir
   
-  Dir.glob("submodules/*/src/css/*.css").each do |path|
+  Dir.glob("submodules/*/dist/css/*.css").each do |path|
     basename = File.basename(path)
     Rake.rake_output_message 'asset ' + basename
     File.open("#{css_dir}/#{basename}", "w") do |out|
