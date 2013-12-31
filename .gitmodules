@@ -4,3 +4,12 @@
 [submodule "submodules/jquery-responsive-text"]
 	path = submodules/jquery-responsive-text
 	url = https://github.com/benignware/jquery-responsive-text
+[submodule "submodules/jquery-nativepicker"]
+	path = submodules/jquery-nativepicker
+	url = https://github.com/benignware/jquery-nativepicker.git
+[submodule "submodules/jquery-touchclick"]
+	path = submodules/jquery-touchclick
+	url = https://github.com/benignware/jquery-touchclick.git
+[submodule "submodules/bootstrap-dropdown-control"]
+	path = submodules/bootstrap-dropdown-control
+	url = https://github.com/benignware/bootstrap-dropdown-control.git
