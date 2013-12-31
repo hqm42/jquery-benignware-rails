@@ -1,9 +1,6 @@
 [submodule "submodules/jquery-checkview"]
 	path = submodules/jquery-checkview
 	url = https://github.com/benignware/jquery-checkview
-[submodule "submodules/jquery-back-to-top"]
-	path = submodules/jquery-back-to-top
-	url = https://github.com/benignware/jquery-back-to-top
 [submodule "submodules/jquery-responsive-text"]
 	path = submodules/jquery-responsive-text
 	url = https://github.com/benignware/jquery-responsive-text
