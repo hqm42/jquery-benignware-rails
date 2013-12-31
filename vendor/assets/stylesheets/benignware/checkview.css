@@ -1,0 +1,17 @@
+
+.btn-checkview {
+  background-color: #FFFFFF;
+  border: 1px solid #333333;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.btn-checkview:focus {
+  /* add custom focus styles here */
+}
+
+.btn-checkview .icon-ok {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  background: url('http://cdn.dustball.com/tick.png') no-repeat center
+}

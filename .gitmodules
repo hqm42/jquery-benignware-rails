@@ -13,3 +13,6 @@
 [submodule "submodules/bootstrap-dropdown-control"]
 	path = submodules/bootstrap-dropdown-control
 	url = https://github.com/benignware/bootstrap-dropdown-control.git
+[submodule "submodules/jquery-scroll-to"]
+	path = submodules/jquery-scroll-to
+	url = https://github.com/benignware/jquery-scroll-to.git
