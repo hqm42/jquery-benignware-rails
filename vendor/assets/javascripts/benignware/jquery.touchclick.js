@@ -48,6 +48,7 @@
     var scrollingTimeoutId = null;
     
     $element.bind('touchstart', function(event) {
+      
       touchStartScrollPos = null;
       overflowContainer = getOverflowContainer(event.target);
       if (overflowContainer) {
@@ -63,9 +64,12 @@
       scrolling = false;
       touchStartElement = event.target;
       
+      $(event.target).unbind('scroll', scrollHandler);
       if (overflowContainer && (overflowContainer.scrollHeight > 0 || overflowContainer.scrollWidth > 0)) {
         $(overflowContainer).bind('scroll', scrollHandler);
       }
+      
+      $(event.target).unbind('click', preventClickHandler);
       
     });
     
@@ -86,17 +90,19 @@
     
     function preventClickHandler(event, custom) {
       
+      
+      
       if (!custom) {
         // prevent original event
-        event.preventDefault();
+        //event.preventDefault();
+        // prevent propagation
         event.stopImmediatePropagation();
-        // remove listener
         $(this).unbind('click', preventClickHandler);
+        
       } else {
         // custom click actions
         
-        // focus the element
-        $(event.target).focus();
+        //$(event.target).focus();
         
         // open links 
         window.setTimeout(function() {
@@ -112,9 +118,10 @@
     
     $element.bind('touchend', function(event) {
       
+      $(event.target).unbind('click', preventClickHandler);
+      
       if (!scrolling && !dragging && event.target == touchStartElement) {
         
-        $(event.target).unbind('click', preventClickHandler);
         $(event.target).bind('click', preventClickHandler);
         
         var events = jQuery._data(event.target).events;
@@ -123,13 +130,13 @@
           onClickHandlers.splice(0, 0, onClickHandlers.pop());
         }
         
-        // $(event.target).focus();
-        
         $(event.target).trigger({
           type: 'click', 
           bubbles: true
         }, [true]);
-
+        
+        $(event.target).focus();
+        
         event.preventDefault();
         event.stopImmediatePropagation();
       }
