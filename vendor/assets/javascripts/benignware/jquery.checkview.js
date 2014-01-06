@@ -1,42 +1,24 @@
 
 (function ( $, window) {
-
-	console.info ('init checkview plugin');
 	
-	var pluginName = 'checkView';
+	var pluginName = 'checkview';
 	
 	var defaults = {
-		'containerClass': 'checkview', 
-		'iconClass': 'icon-ok',
-		'autoSubmit': true
+	  'buttonTag': 'span', 
+		'buttonClass': 'btn btn-default btn-xs btn-mini btn-checkview', 
+		'iconClass': 'glyphicon glyphicon-ok icon-ok',
+		'submitOnKeyEnter': true
 	};
-	
-	// TODO: replace with jquery has
-	function isChildOf(child, parent) {
-		if (parent == child) return false;
-		var c = child;
-		try {
-			while (c) {
-				if (child.ownerDocument != null && c == child.ownerDocument.documentElement) return false;
-				if (c.parentNode == parent) return true;
-				if (c.parentNode == null) return false; 
-				c = c.parentNode;
-			}
-		} catch (e) {
-			//console.error(e);
-		}
-		return false;
-	}
-	
+
 	var pluginClass = function CheckView(element, options) {
-		
+				
 		var eventType = 'click';
 
-		var checkboxView = this;
+		var checkView = this;
 		
 		var doc = element.ownerDocument;
 		
-		var $elem = $(element);
+		var $element = $(element);
 		element.tabIndex = "-1";
 		
 		element.style.position = 'absolute';
@@ -49,29 +31,26 @@
 			 : previousElement && previousElement.tagName == "input" && previousElement.type == "hidden" ? previousElement
 			 : null;
 		
-		var containerView = $(element).parents("." + options.containerClass)[0];
+		var containerView, $containerView;
+		
+		var containerView = $element.parents("." + options.buttonClass)[0];
 		if (!containerView) {
-			containerView = doc.createElement('span');
+			containerView = doc.createElement(options.buttonTag || 'span');
 			element.parentNode.insertBefore(containerView, element);
 		}
+    var $containerView = $(containerView);
 		
 		containerView.tabIndex = "0";
-		containerView.className = options.containerClass;
+		containerView.className = options.buttonClass;
 		containerView.style.display = 'inline-block';
-		containerView.style.lineHeight = "0";
 		containerView.style.cursor = "pointer";
 		
 		var checkmarkIcon = doc.createElement('i');
-		checkmarkIcon.style.margin = "0";
 		checkmarkIcon.className = options.iconClass;
 		containerView.appendChild(checkmarkIcon);
+		
 
 		// private methods
-		
-		function toggleCheckbox() {
-			element.checked = !element.checked;
-			checkboxView.invalidate();
-		}
 		
 		function init() {
 			
@@ -85,53 +64,34 @@
 
 			var $label;
 			
-			$(containerView).bind('keypress', function(event) {
+			$containerView.bind('keypress', function(event) {
 				
 				if (event.which == 32) {
 					element.checked = !element.checked;
-					checkboxView.invalidate();
+					checkView.invalidate();
 				}
 				
-				if (event.which == 13 && options.autoSubmit) {
+				if (event.which == 13 && options.submitOnKeyEnter) {
 					if (element.form) {
 						element.form.submit();
 					}
 				}
 				
 			});
-			
-			
-			$(element).bind('change', function(event) {
-				checkboxView.invalidate();
+		    
+			$element.bind('change', function(event) {
+				checkView.invalidate();
 				window.clearTimeout(toggleClickTimeoutId);
 			});
-			
-			$(containerView).parents('label').bind("click", function(event) {
-				if (event.target != element && event.target != containerView && !isChildOf(event.target, containerView)) {
-          			event.stopImmediatePropagation();
-          			$(containerView).trigger('click');
-        		}
-      		});
       
-		    var toggleClickTimeoutId = null;
-		      
-		    function toggleClick() {
-		      	element.checked = !element.checked;
-		        $(element).trigger('change');
-		    }
-		      
-		    $(containerView).bind("click", function(event) {
-		      	if (event.target != element) {
-		        	window.clearTimeout(toggleClickTimeoutId);
-		        	toggleClickTimeoutId = window.setTimeout(function() {
-		            	toggleClick();
-		          	}, 100);
-		        	event.preventDefault();
-		        };
-		    });
+	    var toggleClickTimeoutId = null;
+	    function toggleClick() {
+	    	element.checked = !element.checked;
+        $(element).trigger('change');
+	    } 
 
 			$(window).bind('resize', function() {
-				checkboxView.invalidate();
+				checkView.invalidate();
 			});
 			
 			this.invalidate();
@@ -139,11 +99,20 @@
 		};
 		
 		function layout() {
+		  var $containerView = $(containerView);
 			if (element.checked) {
-				$(containerView).addClass('checked');
+				$containerView.addClass('checked');
 			} else {
-				$(containerView).removeClass('checked');
+				$containerView.removeClass('checked');
 			}
+			var $copyStyles = $(['margin-left']);
+			var css = {};
+			$copyStyles.each(function() {
+			  var value = $element.css(this);
+			  if (value) css[this] = value;
+			});
+			$containerView.css(css);
+			
 			checkmarkIcon.style.visibility = element.checked ? '' : 'hidden';
 			checkmarkIcon.style.position = 'relative';
 			checkmarkIcon.style.left = (($(containerView).width() - $(checkmarkIcon).width()) / 2) + 'px';
@@ -155,9 +124,9 @@
 		this.setChecked = function(bool) {
 			element.checked = bool;
 			if (bool) {
-			  $(element).attr('checked', 'checked');
+			  $element.attr('checked', 'checked');
 			} else {
-			  $(element).removeAttr('checked');
+			  $element.removeAttr('checked');
 			}
 			this.invalidate();
 		};
