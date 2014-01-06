@@ -44,7 +44,7 @@ end
 
 desc 'Builds the gem'
 task :build => [:update, :clean, :assets] do
-  sh "gem build jquery-benignware-rails.gemspec"
+  #sh "gem build jquery-benignware-rails.gemspec"
 end
 
 
