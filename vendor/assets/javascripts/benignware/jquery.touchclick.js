@@ -8,8 +8,6 @@
   
   var pluginName = 'touchclick';
   
-  console.log('init touchclick v0.0.9');
-  
   var defaults = {
     draggingTimeout: 100, 
     scrollingTimeout: 750, 
