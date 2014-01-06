@@ -2,7 +2,8 @@ require "bundler/gem_tasks"
 
 task :update do
   Rake.rake_output_message 'update modules'
-  sh 'git submodule foreach git pull origin master'  
+  sh 'git submodule foreach git pull origin master'
+  sh 'git submodule foreach ant build'
 end
 
 desc "Remove the vendor directory"
@@ -12,6 +13,7 @@ end
 
 desc "Generate the JavaScript assets"
 task :assets => [:update, :clean] do
+  
   
   js_dir = "vendor/assets/javascripts/benignware"
   mkdir_p js_dir
