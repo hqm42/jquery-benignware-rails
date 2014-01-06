@@ -16,3 +16,6 @@
 [submodule "submodules/jquery-scroll-to"]
 	path = submodules/jquery-scroll-to
 	url = https://github.com/benignware/jquery-scroll-to.git
+[submodule "modules/jquery-touchclick"]
+	path = modules/jquery-touchclick
+	url = https://github.com/benignware/jquery-touchclick
