@@ -15,8 +15,6 @@ Gem::Specification.new do |gem|
   gem.add_dependency "railties", ">= 3.2.0", "< 5.0"
   
   gem.files         = `git ls-files`.split($/)
-  #gem.files        = `git ls-files`.split($/).reject { |f| f =~ /^jquery-checkview|^jquery-back-to-top|^jquery-responsive-text/ }
-  #gem.files         = Dir["{lib,vendor}/**/*"]
   
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})

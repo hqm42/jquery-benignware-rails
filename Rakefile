@@ -11,8 +11,7 @@ task :clean do
 end
 
 desc "Generate the JavaScript assets"
-task :assets do
-  
+task :assets => [:update, :clean] do
   
   js_dir = "vendor/assets/javascripts/benignware"
   mkdir_p js_dir
@@ -43,10 +42,10 @@ task :assets do
 end
 
 
-# desc 'Builds the gem'
-# task :build => [:update, :clean, :assets] do
-  # sh "gem build jquery-benignware-rails.gemspec"
-# end
+desc 'Builds the gem'
+task :build => [:update, :clean, :assets] do
+  sh "gem build jquery-benignware-rails.gemspec"
+end
 
 
 #task :default => :build
